@@ -1,5 +1,5 @@
 import { ChordProParser, Transposer } from "../src";
-import { ChordProFormatter, HtmlFormatter } from "../src/formatter";
+import { ChordProFormatter, HtmlFormatter, TextFormatter } from "../src/formatter";
 import { FormatterSettings } from "../src/formatter/FormatterSettings";
 import { MusicAccidental, MusicLetter, MusicNote } from "../src";
 
@@ -13,7 +13,7 @@ var chordSheet = `
 {key: Am}
 
 [Am] [F] [C] [G]
-[Am] [F] [C] [G] 
+[Am] [F] [C] [G]
 
 {start_of_verse: Verse 1}
 Leave me [Am]out with the [F]waste,
@@ -41,7 +41,7 @@ The Lion and the [C#m]Lamb
 Seated on the [Gm]throne    [E7]
 [Am]Mountains bow [F]down
 Every ocean [C]roars
-To the Lord of [G]hosts  
+To the Lord of [G]hosts
 
 {start_of_chorus}
 [F]Praise Ado[Am]nai
@@ -51,7 +51,7 @@ From the [G]rising of the sun
 All the [G]nations of the earth
 All the [Dm7] Angels and the [F]Saints
 [G]Sing [Bbsus2]praise
-{end_of_chorus} 
+{end_of_chorus}
     `.substring(1);
 
 const cp = new ChordProParser();
@@ -64,11 +64,10 @@ settings.showTabs = true;
 settings.useSimpleChord = false;
 settings.showChords = true;
 
-const formatter = new HtmlFormatter(settings);
-const result = formatter.format(transposedSong);
-document.body.innerHTML = `${result.join("\n")}`;
+const htmlFormatter = new HtmlFormatter(settings);
+const htmlResult = htmlFormatter.format(transposedSong);
+document.body.innerHTML = `${htmlResult.join("\n")}`;
 
-const timeString = song.time?.toString();
-console.log("Time: " + timeString);
-//document.body.innerHTML = `<pre>${result.join('\n')}</pre>`;
-//document.getElementById('demo')!.innerHTML = `<pre>${result.join('\n')}</pre>`;
+const textFormatter = new TextFormatter(settings);
+const textResult = textFormatter.format(transposedSong);
+console.log(textResult.join("\n"));
