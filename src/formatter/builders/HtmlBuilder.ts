@@ -140,19 +140,6 @@ export class HtmlBuilder implements IBuilder {
         return [this.buildHtmlElement("div", "", classNames)];
     }
 
-    private createWordElement(...innerHtml: IPrintable[]): IPrintable {
-        if (
-            !innerHtml
-                .map((e) => e.toStringLines())
-                .join("")
-                .trim()
-        ) {
-            return new SimplePrintable(""); // avoid empty word
-        }
-        let element = new HtmlElement("div", ["word"], ...innerHtml);
-        return element;
-    }
-
     private createChordElement(chord: string, isChord: boolean): HtmlElement {
         let classNames = ["above-lyrics"];
         if (isChord) {
@@ -196,8 +183,7 @@ export class HtmlBuilder implements IBuilder {
         }
 
         let lineElement = new HtmlElement("div", ["lyrics-line"]);
-        let previousElements: IPrintable[] = [];
-        line.pairs.forEach((pair, index) => {
+        line.pairs.forEach((pair, _) => {
             let hasTextAbove = pair.chord != null || pair.text != null;
             let isChord = pair.chord != null;
             let chordValue = "";
@@ -208,65 +194,16 @@ export class HtmlBuilder implements IBuilder {
             }
 
             let lyrics = hasTextAbove ? pair.lyrics : pair.lyrics.trimStart();
-            lyrics = lyrics.replace(/ +/g, " ");
-            let words = lyrics.split(" ");
-            let firstWord = words.shift();
-            let lastWord = words.pop();
-
-            // first word is a space
-            if (firstWord == "") {
-                // means that the previous chord lyrics was a word
-                if (previousElements.length > 0) {
-                    let word = this.createWordElement(...previousElements);
-                    lineElement.addElement(word);
-                    previousElements = [];
-                }
-                firstWord = "&nbsp;";
-                if (words.length > 0) {
-                    firstWord += words.shift();
-                }
+            lyrics = lyrics.replace(/ +/g, "&nbsp;");
+            if (lyrics == "") {
+                lyrics = "&nbsp;";
             }
 
-            if (!haslyrics) {
-                firstWord = undefined;
-            }
-            // create the first element
-            var firstElement = hasTextAbove
-                ? this.createChordLyricsElement(chordValue, isChord, firstWord)
-                : this.createLyricsElement(firstWord!);
-            previousElements.push(firstElement);
-
-            if (lastWord == undefined && index < line.pairs.length - 1) {
-                return;
-            }
-
-            // add the element as a word
-            let wordElement = this.createWordElement(...previousElements);
-            lineElement.addElement(wordElement);
-            previousElements = [];
-
-            // for each other words
-            words.forEach((word) => {
-                let lyricsElement = this.createLyricsElement(word);
-                let wordElement = this.createWordElement(lyricsElement);
-                lineElement.addElement(wordElement);
-            });
-
-            // last word is not a space
-            if (lastWord != "" && lastWord != undefined) {
-                previousElements.push(this.createLyricsElement(lastWord));
-                if (index < line.pairs.length - 1) {
-                    return;
-                }
-            }
+            var element = hasTextAbove
+                ? this.createChordLyricsElement(chordValue, isChord, lyrics)
+                : this.createLyricsElement(lyrics);
+            lineElement.addElement(element);
         });
-
-        // finish the line
-        if (previousElements.length > 0) {
-            let wordElement = this.createWordElement(...previousElements);
-            lineElement.addElement(wordElement);
-            previousElements = [];
-        }
 
         return lineElement.toStringLines();
     }
