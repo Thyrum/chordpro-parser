@@ -38,7 +38,8 @@ export class ChordDiagram implements IClonable<ChordDiagram> {
      * @returns Chord diagram (or null if wrong format)
      */
     public static parse(text: string): ChordDiagram | undefined {
-        const pattern = /^\{define: (?<chord>([A-G][#bx]{0,2})(.*?)(?: |(?:\/([A-G][#bx]{0,2})))) *base-fret (?<basefret>[1-9][0-9]?) *frets(?<frets>( [0-9xNn]){6})( *fingers(?<fingers>( [0-5]){6}))?\}$/;
+        const pattern =
+            /^\{define: (?<chord>([A-G][#bx]{0,2})(.*?)(?: |(?:\/([A-G][#bx]{0,2})))) *base-fret (?<basefret>[1-9][0-9]?) *frets(?<frets>( [0-9xNn]){6})( *fingers(?<fingers>( [0-5]){6}))?\}$/;
         const match = text.match(pattern);
         if (!match || match.length < 1 || !match.groups) {
             return undefined;

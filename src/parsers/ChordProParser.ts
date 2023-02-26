@@ -39,11 +39,11 @@ export class ChordProParser {
      * parse the sheet
      */
     parse(sheet: string): Song {
-        if(!sheet.trim()){
+        if (!sheet.trim()) {
             this.addWarning("The song sheet is empty");
             return new Song();
         }
-        
+
         this._song.rawContent = sheet;
         const lines = sheet.split(/\r\n|\r|\n/);
 
@@ -130,7 +130,9 @@ export class ChordProParser {
                 if (!result[0]) {
                     const lyrics = result[1].lyrics.trim();
                     if (lyrics) {
-                        this.addWarning(`Cannot parse the chord '${result[1].text}' before the lyrics '${result[1].lyrics.trim()}'`);
+                        this.addWarning(
+                            `Cannot parse the chord '${result[1].text}' before the lyrics '${result[1].lyrics.trim()}'`
+                        );
                     } else {
                         this.addWarning(`Cannot parse the chord '${result[1].text}'`);
                     }
@@ -233,7 +235,9 @@ export class ChordProParser {
     private parseStartOfBlockTag(longName: string, value: string | null) {
         // check previous section is closed
         if (this._currentSectionTagName !== null) {
-            this.addWarning(`The section tag ${this._currentSectionTagName} must be closed before starting a new section`);
+            this.addWarning(
+                `The section tag ${this._currentSectionTagName} must be closed before starting a new section`
+            );
         }
 
         this.completeCurrentSection();

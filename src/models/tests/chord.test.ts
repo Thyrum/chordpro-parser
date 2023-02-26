@@ -46,7 +46,11 @@ test.each`
 });
 
 test("parse the chord with a bass and return the right chord", () => {
-    const expected = new Chord(new Key(new MusicNote(MusicLetter.A, MusicAccidental.b), KeyMode.Major), "sus2sus4", new MusicNote(MusicLetter.C));
+    const expected = new Chord(
+        new Key(new MusicNote(MusicLetter.A, MusicAccidental.b), KeyMode.Major),
+        "sus2sus4",
+        new MusicNote(MusicLetter.C)
+    );
     const chord = Chord.parse("Absus2sus4/C");
     expect(chord).toMatchObject(expected);
 });

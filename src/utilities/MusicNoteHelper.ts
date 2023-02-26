@@ -106,8 +106,7 @@ export abstract class MusicNoteHelper {
     private static getNormalizeNumber(number: number, min: number, max: number, amount: number): number {
         if (number < min) {
             number = number + amount;
-        }
-        else if (number > max) {
+        } else if (number > max) {
             number = number - amount;
         }
         return number;

@@ -24,11 +24,14 @@ test.each`
     ${"Ex"}  | ${MusicLetter.E} | ${MusicAccidental["##"]}
     ${"F"}   | ${MusicLetter.F} | ${MusicAccidental.none}
     ${" G "} | ${MusicLetter.G} | ${MusicAccidental.none}
-`("parse the music note $note and return the correct note with symbol", ({ note, expectedLetter, expectedAccidental }) => {
-    const expectednote = new MusicNote(expectedLetter, expectedAccidental);
-    const resultnote = MusicNote.parse(note);
-    expect(resultnote).toMatchObject(expectednote);
-});
+`(
+    "parse the music note $note and return the correct note with symbol",
+    ({ note, expectedLetter, expectedAccidental }) => {
+        const expectednote = new MusicNote(expectedLetter, expectedAccidental);
+        const resultnote = MusicNote.parse(note);
+        expect(resultnote).toMatchObject(expectednote);
+    }
+);
 
 test.each`
     note     | expected

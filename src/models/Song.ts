@@ -110,7 +110,7 @@ export class Song implements IClonable<Song> {
                         });
                     }
                     lineLyrics = lineLyrics.trim();
-                    if(lineLyrics){
+                    if (lineLyrics) {
                         lyrics.push(lineLyrics);
                     }
                 });
@@ -219,7 +219,7 @@ export class Song implements IClonable<Song> {
         clonedSong.title = this.title;
         clonedSong.year = this.year;
         if (this.time) {
-            clonedSong.time = new TimeSignature(this.time.bottomNumber,this.time.topNumber);
+            clonedSong.time = new TimeSignature(this.time.bottomNumber, this.time.topNumber);
         }
         if (this.key) {
             clonedSong.key = this.key.clone();

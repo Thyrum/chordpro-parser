@@ -153,7 +153,11 @@ test("format lyrics line without chords", () => {
 });
 
 test("format lyrics line", () => {
-    let pairs = [new ChordLyricsPair("Test ", null), new ChordLyricsPair("Test ", Chord.parse("Am")), new ChordLyricsPair("Test", null, "abc")];
+    let pairs = [
+        new ChordLyricsPair("Test ", null),
+        new ChordLyricsPair("Test ", Chord.parse("Am")),
+        new ChordLyricsPair("Test", null, "abc"),
+    ];
     let line = new LyricsLine(pairs);
     const result = _builder.lyricsLine(line);
     const expected = "Test [Am]Test [*abc]Test";

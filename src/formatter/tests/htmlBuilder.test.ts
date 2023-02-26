@@ -191,17 +191,43 @@ test("format lyrics line without chords", () => {
 test("format lyrics line with last chord", () => {
     let pairs = [
         new ChordLyricsPair(" Who is like ", Chord.parse("Am")),
-        new ChordLyricsPair("Him,", Chord.parse("Bb11"))
+        new ChordLyricsPair("Him,", Chord.parse("Bb11")),
     ];
     let line = new LyricsLine(pairs);
     const result = _builder.lyricsLine(line);
     const expected = [
         `<div class="lyrics-line">`,
-        `<div class="word">`,`<div class="chord-lyrics">`,`<span class="above-lyrics chord">`,`Am`,`</span>`,`<span class="lyrics">`,`&nbsp;Who`,`</span>`,`</div>`,`</div>`,
-        `<div class="word">`,`<span class="lyrics">`,`is`,`</span>`,`</div>`,
-        `<div class="word">`,`<span class="lyrics">`,`like`,`</span>`,`</div>`,
-        `<div class="word">`,`<div class="chord-lyrics">`,`<span class="above-lyrics chord">`,`Bb11`,`</span>`,`<span class="lyrics">`,`Him,`,`</span>`,`</div>`,`</div>`,
-        `</div>`
+        `<div class="word">`,
+        `<div class="chord-lyrics">`,
+        `<span class="above-lyrics chord">`,
+        `Am`,
+        `</span>`,
+        `<span class="lyrics">`,
+        `&nbsp;Who`,
+        `</span>`,
+        `</div>`,
+        `</div>`,
+        `<div class="word">`,
+        `<span class="lyrics">`,
+        `is`,
+        `</span>`,
+        `</div>`,
+        `<div class="word">`,
+        `<span class="lyrics">`,
+        `like`,
+        `</span>`,
+        `</div>`,
+        `<div class="word">`,
+        `<div class="chord-lyrics">`,
+        `<span class="above-lyrics chord">`,
+        `Bb11`,
+        `</span>`,
+        `<span class="lyrics">`,
+        `Him,`,
+        `</span>`,
+        `</div>`,
+        `</div>`,
+        `</div>`,
     ];
     expect(result).toMatchObject(expected);
 });

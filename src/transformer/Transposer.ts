@@ -26,12 +26,13 @@ export abstract class Transposer {
                             const note = MusicNoteHelper.transpose(pair.chord.key.note, letterDiff, semiTones);
                             const newChord = pair.chord;
                             newChord.key.note = note;
-                            if(pair.chord.bass){
+                            if (pair.chord.bass) {
                                 const bassNote = MusicNoteHelper.transpose(pair.chord.bass, letterDiff, semiTones);
                                 newChord.bass = bassNote;
                             }
 
-                            (<LyricsLine>newSong.sections[sectionIndex].lines[lineIndex]).pairs[pairIndex].chord = newChord;
+                            (<LyricsLine>newSong.sections[sectionIndex].lines[lineIndex]).pairs[pairIndex].chord =
+                                newChord;
                             console.log("New chord: " + newChord.toString());
                         }
                     });

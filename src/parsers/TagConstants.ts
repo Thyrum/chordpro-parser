@@ -153,5 +153,10 @@ export abstract class TagConstants {
         TagConstants.START_OF_VERSE,
     ];
 
-    static readonly END_BLOCK_TAGS = [TagConstants.END_OF_BRIDGE, TagConstants.END_OF_CHORUS, TagConstants.END_OF_TAB, TagConstants.END_OF_VERSE];
+    static readonly END_BLOCK_TAGS = [
+        TagConstants.END_OF_BRIDGE,
+        TagConstants.END_OF_CHORUS,
+        TagConstants.END_OF_TAB,
+        TagConstants.END_OF_VERSE,
+    ];
 }

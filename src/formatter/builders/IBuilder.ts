@@ -3,7 +3,7 @@ import { Section } from "../../models/sections";
 import { BuilderSettings } from "./BuilderSettings";
 
 export interface IBuilder {
-    settings:BuilderSettings;
+    settings: BuilderSettings;
 
     titleMetadata(value: string): string[];
     subtitleMetadata(value: string): string[];
